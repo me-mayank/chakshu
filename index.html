@@ -4,78 +4,84 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>CHAKSHU: Product Requirements Document v1.1</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
-:root{--bg:#c6cab0;--panel:#dcdfcb;--ink:#191c12;--mute:#475038;--rule:#191c12;--hair:#98a07f;--olive:#4a6a2c;--od:#2b3720;--lt:#eef0dc;--orange:#d4540a;--blue:#255a7d;--amber:#e3b00b;--rust:#a8321e;color-scheme:light dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13160e;--panel:#1b2014;--ink:#e0e3cf;--mute:#a1a98c;--rule:#6f785a;--hair:#3e4630;--olive:#93b562;--od:#243019;--orange:#f27a2c;--blue:#78b1d6;--amber:#e8bb2a;--rust:#c9472b}}
-:root[data-theme="dark"]{--bg:#13160e;--panel:#1b2014;--ink:#e0e3cf;--mute:#a1a98c;--rule:#6f785a;--hair:#3e4630;--olive:#93b562;--od:#243019;--orange:#f27a2c;--blue:#78b1d6;--amber:#e8bb2a;--rust:#c9472b}
+:root{--bg:#0a0e13;--panel:#111820;--ink:#d8e1e9;--mute:#8497a8;--rule:#2a3947;--hair:#1c2833;--cyan:#2ee6d6;--blue:#4aa3ff;--amber:#f2c230;--red:#ff5140;--hi:#f1fafc;color-scheme:dark light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#e3e8ed;--panel:#f4f7f9;--ink:#141f28;--mute:#4d6070;--rule:#a9b6c2;--hair:#cdd7de;--cyan:#00706f;--blue:#1b5fa8;--amber:#8a6500;--red:#b3261e;--hi:#0b141b}}
+:root[data-theme="light"]{--bg:#e3e8ed;--panel:#f4f7f9;--ink:#141f28;--mute:#4d6070;--rule:#a9b6c2;--hair:#cdd7de;--cyan:#00706f;--blue:#1b5fa8;--amber:#8a6500;--red:#b3261e;--hi:#0b141b}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.6 "IBM Plex Mono","Courier New",monospace}
+body{margin:0;background:var(--bg) linear-gradient(color-mix(in srgb,var(--cyan) 5%,transparent) 1px,transparent 1px) 0 0/44px 44px;color:var(--ink);font:400 14.5px/1.65 "JetBrains Mono","Courier New",monospace}
 .wrap{max-width:1040px;margin:0 auto;padding:0 20px 56px}
-h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif;margin:0;text-transform:uppercase}
-h1{font-size:clamp(3.2rem,12vw,6.8rem);line-height:.92;font-weight:700;letter-spacing:.02em;color:#f1f3e2}
-h2{display:grid;grid-template-columns:64px 1fr;align-items:center;font-size:1.7rem;font-weight:600;letter-spacing:.03em;margin:48px 0 16px;border-top:5px solid var(--orange);padding-top:8px}
-h2 .c{justify-self:start;font:600 .85rem "IBM Plex Mono",monospace;background:var(--od);color:var(--lt);padding:1px 8px}
-h3{font-size:1.1rem;font-weight:600;letter-spacing:.06em;color:var(--blue);margin:0 0 8px}
+h1,h2,h3{font-family:"Chakra Petch","Arial Narrow",Arial,sans-serif;margin:0;text-transform:uppercase}
+h1{font-size:clamp(3rem,11vw,6.2rem);line-height:.95;font-weight:700;letter-spacing:.08em;color:var(--hi)}
+h2{display:grid;grid-template-columns:92px 1fr;align-items:center;font-size:1.5rem;font-weight:600;letter-spacing:.05em;margin:52px 0 16px;padding-top:12px;border-top:1px solid var(--rule);background:linear-gradient(var(--cyan),var(--cyan)) 0 0/72px 3px no-repeat;color:var(--hi)}
+h2 .c{justify-self:start;font:500 .75rem "JetBrains Mono",monospace;letter-spacing:.08em;color:var(--cyan);border:1px solid var(--cyan);padding:0 7px}
+h2 .c::before{content:"SEC "}
+h3{font-size:1rem;font-weight:600;letter-spacing:.08em;color:var(--cyan);margin:0 0 8px}
 p{margin:0 0 10px;max-width:84ch}
 ul{margin:0;padding:0;list-style:none}
 li{position:relative;padding-left:16px;margin:4px 0;max-width:84ch}
-li::before{content:"■";position:absolute;left:0;top:.05em;font-size:.6rem;line-height:1.9;color:var(--orange)}
-.bad li::before{content:"×";font-size:1rem;line-height:1.5;color:var(--rust);font-weight:700}
-a{color:inherit}
-.hero{margin-top:24px;padding:28px 24px 24px;background:var(--od);color:var(--lt);border-bottom:8px solid var(--orange)}
-.doc{font-size:.8rem;color:#b9c49a;border-bottom:1px solid #4d5f37;padding-bottom:6px;margin-bottom:16px}
-.sub{font:600 1.4rem/1.2 "Barlow Condensed","Arial Narrow",Arial,sans-serif;text-transform:uppercase;letter-spacing:.04em;margin:14px 0 10px;max-width:40ch;color:#efc02a}
-.tag{color:#cdd5b3;margin:0}
+li::before{content:"›";position:absolute;left:2px;color:var(--cyan);font-weight:700}
+.bad li::before{content:"×";left:1px;color:var(--red)}
+.hero{position:relative;margin-top:24px;padding:26px 24px 20px;background:var(--panel);border:1px solid var(--rule);border-top:3px solid var(--cyan);clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,0 100%)}
+.doc{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:18px}
+.doc::before{content:"";display:inline-block;width:8px;height:8px;background:var(--cyan);margin-right:10px}
+.sub{font:500 1.2rem/1.25 "Chakra Petch","Arial Narrow",Arial,sans-serif;letter-spacing:.04em;text-transform:uppercase;margin:14px 0 8px;max-width:44ch;color:var(--cyan)}
+.tag{color:var(--mute);margin:0 0 18px}
+.ruler{height:9px;background:repeating-linear-gradient(90deg,var(--rule) 0 1px,transparent 1px 8px),repeating-linear-gradient(90deg,var(--cyan) 0 1px,transparent 1px 40px);background-size:100% 5px,100% 9px;background-repeat:no-repeat;background-position:0 bottom,0 bottom}
 .meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:20px 0}
-.meta div{background:var(--panel);padding:8px 12px;border-left:5px solid var(--olive)}
+.meta div{background:var(--panel);padding:8px 12px;border-left:3px solid var(--cyan)}
 .meta div:nth-child(even){border-left-color:var(--blue)}
-.meta b{display:block;font-size:.7rem;font-weight:500;color:var(--mute);text-transform:uppercase;letter-spacing:.08em}
-.meta span{font-weight:600}
+.meta b{display:block;font-size:.68rem;font-weight:500;color:var(--mute);text-transform:uppercase;letter-spacing:.1em}
+.meta span{font-weight:600;color:var(--hi)}
 nav{display:flex;flex-wrap:wrap;margin:16px 4px 0 0}
-nav a{font-size:.8rem;font-weight:500;text-decoration:none;color:var(--blue);background:var(--panel);border:1px solid var(--rule);margin:0 -1px -1px 0;padding:3px 10px}
-nav a:hover,nav a:focus-visible{background:var(--orange);color:#fff;outline:none}
-.p{background:var(--panel);border:1px solid var(--rule);border-top:5px solid var(--olive);padding:14px 16px}
+nav a{font-size:.75rem;text-decoration:none;color:var(--cyan);background:var(--panel);border:1px solid var(--rule);margin:0 -1px -1px 0;padding:3px 10px}
+nav a:hover,nav a:focus-visible{background:var(--cyan);color:var(--bg);outline:none}
+.p{position:relative;background:var(--panel);border:1px solid var(--rule);border-top:3px solid var(--cyan);padding:14px 16px;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
+.p::after{content:"";position:absolute;top:0;right:0;width:14px;height:14px;background:linear-gradient(to top right,transparent calc(50% - .5px),var(--rule) calc(50% - .5px),var(--rule) calc(50% + .5px),transparent calc(50% + .5px))}
 .g3 .p:nth-child(even),.g4 .p:nth-child(even){border-top-color:var(--blue)}
-.p.gold{border-top-color:var(--amber);background:color-mix(in srgb,var(--amber) 16%,var(--panel))}
-.p.red{border-top-color:var(--rust);background:color-mix(in srgb,var(--rust) 12%,var(--panel))}
+.g3 .p:nth-child(even) h3,.g4 .p:nth-child(even) h3{color:var(--blue)}
+.p.gold{border-top-color:var(--amber);background:color-mix(in srgb,var(--amber) 9%,var(--panel))}
+.p.gold h3{color:var(--amber)}
+.p.red{border-top-color:var(--red);background:color-mix(in srgb,var(--red) 8%,var(--panel))}
+.p.red h3{color:var(--red)}
 .g2,.g3,.g4{display:grid;gap:12px}
 .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 .g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
 .g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 .mt{margin-top:14px}
-.lead{font-size:1.05rem;font-weight:500}
-.quote{border-left:6px solid var(--orange);padding:2px 14px;margin:20px 0;font-size:1.05rem;font-weight:500}
+.lead{font-size:1rem;font-weight:500;color:var(--hi)}
+.quote{border-left:3px solid var(--cyan);padding:2px 16px;margin:22px 0;font-size:1rem;color:var(--hi)}
 .tw{overflow-x:auto}
 table{width:100%;border-collapse:collapse}
-th{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--lt);background:var(--od);text-align:left;padding:6px 10px}
+th{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:left;padding:6px 10px;border-bottom:1px solid var(--cyan)}
 td{padding:7px 10px;border-bottom:1px solid var(--hair);vertical-align:top}
-tr:nth-child(even) td{background:color-mix(in srgb,var(--olive) 8%,transparent)}
-td:first-child{font-weight:600;white-space:nowrap}
-.st{display:inline-block;font-size:.75rem;font-weight:700;padding:0 7px;margin-right:8px;color:#fff;background:var(--olive)}
-.st.b{background:var(--amber);color:#1a1d12}
-.st.c{background:var(--blue);color:#fff}
+tr:hover td{background:color-mix(in srgb,var(--cyan) 6%,transparent)}
+td:first-child{font-weight:600;white-space:nowrap;color:var(--hi)}
+.st{display:inline-block;font-size:.72rem;font-weight:700;padding:0 7px;margin-right:8px;color:var(--cyan);border:1px solid currentColor}
+.st.b{color:var(--amber)}
+.st.c{color:var(--blue)}
 .flow{list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px;padding:0}
-.flow li{counter-increment:s;padding:8px 10px 8px 46px;background:var(--panel);border:1px solid var(--rule);border-left:5px solid var(--blue);margin:0}
-.flow li::before{content:counter(s,decimal-leading-zero);left:10px;top:8px;font-size:.9rem;line-height:1.6;font-weight:700;color:var(--orange)}
-.warn{background:var(--rust);color:#fff;border:0;border-left:10px solid var(--amber);padding:12px 16px;margin-top:14px}
-.warn b:first-child{color:#ffd54a;letter-spacing:.06em}
-.north{margin-top:48px;padding:24px;background:var(--od);color:var(--lt);border-top:8px solid var(--orange)}
-.north h3{color:#efc02a}
-.north p{font:600 1.9rem/1.15 "Barlow Condensed","Arial Narrow",Arial,sans-serif;max-width:36ch;margin:0}
-footer{margin-top:32px;color:var(--mute);font-size:.8rem;border-top:3px solid var(--olive);padding-top:10px}
-@media(max-width:640px){body{font-size:14px}h2{grid-template-columns:44px 1fr}.hero{padding:22px 16px}}
+.flow li{counter-increment:s;padding:8px 10px 8px 46px;background:var(--panel);border:1px solid var(--rule);border-left:3px solid var(--cyan);margin:0}
+.flow li::before{content:counter(s,decimal-leading-zero);left:10px;top:8px;font-size:.85rem;font-weight:700;color:var(--cyan)}
+.warn{background:color-mix(in srgb,var(--red) 14%,var(--panel));border:1px solid var(--red);border-left:8px solid var(--red);padding:12px 16px;margin-top:14px}
+.warn b:first-child{color:var(--amber);letter-spacing:.08em}
+.north{margin-top:52px;padding:24px;background:var(--panel);border:1px solid var(--cyan);border-left:8px solid var(--cyan)}
+.north p{font:600 1.7rem/1.2 "Chakra Petch","Arial Narrow",Arial,sans-serif;max-width:36ch;margin:0;color:var(--hi)}
+footer{margin-top:32px;color:var(--mute);font-size:.75rem;border-top:1px solid var(--rule);padding-top:10px}
+@media(max-width:640px){body{font-size:14px}h2{grid-template-columns:78px 1fr;font-size:1.3rem}.hero{padding:20px 16px 16px}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <header class="hero">
-<div class="doc">Product Requirements Document / Revision 1.1 / Concept – MVP definition</div>
+<div class="doc">PRD / Rev 1.1 / Status: Concept – MVP definition / Region: India</div>
 <h1>CHAKSHU</h1>
 <div class="sub">Community-based Hazard Assessment &amp; Knowledge System for Urban Mobility</div>
 <p class="tag">A community-powered transport safety intelligence network.</p>
+<div class="ruler" aria-hidden="true"></div>
 </header>
 
 <div class="meta">
