@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CHAKSHU: Product Requirements Document v1.1</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#c6cab0;--panel:#dcdfcb;--ink:#191c12;--mute:#475038;--rule:#191c12;--hair:#98a07f;--olive:#4a6a2c;--od:#2b3720;--lt:#eef0dc;--orange:#d4540a;--blue:#255a7d;--amber:#e3b00b;--rust:#a8321e;color-scheme:light dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13160e;--panel:#1b2014;--ink:#e0e3cf;--mute:#a1a98c;--rule:#6f785a;--hair:#3e4630;--olive:#93b562;--od:#243019;--orange:#f27a2c;--blue:#78b1d6;--amber:#e8bb2a;--rust:#c9472b}}
+:root[data-theme="dark"]{--bg:#13160e;--panel:#1b2014;--ink:#e0e3cf;--mute:#a1a98c;--rule:#6f785a;--hair:#3e4630;--olive:#93b562;--od:#243019;--orange:#f27a2c;--blue:#78b1d6;--amber:#e8bb2a;--rust:#c9472b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.6 "IBM Plex Mono","Courier New",monospace}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px 56px}
+h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif;margin:0;text-transform:uppercase}
+h1{font-size:clamp(3.2rem,12vw,6.8rem);line-height:.92;font-weight:700;letter-spacing:.02em;color:#f1f3e2}
+h2{display:grid;grid-template-columns:64px 1fr;align-items:center;font-size:1.7rem;font-weight:600;letter-spacing:.03em;margin:48px 0 16px;border-top:5px solid var(--orange);padding-top:8px}
+h2 .c{justify-self:start;font:600 .85rem "IBM Plex Mono",monospace;background:var(--od);color:var(--lt);padding:1px 8px}
+h3{font-size:1.1rem;font-weight:600;letter-spacing:.06em;color:var(--blue);margin:0 0 8px}
+p{margin:0 0 10px;max-width:84ch}
+ul{margin:0;padding:0;list-style:none}
+li{position:relative;padding-left:16px;margin:4px 0;max-width:84ch}
+li::before{content:"■";position:absolute;left:0;top:.05em;font-size:.6rem;line-height:1.9;color:var(--orange)}
+.bad li::before{content:"×";font-size:1rem;line-height:1.5;color:var(--rust);font-weight:700}
+a{color:inherit}
+.hero{margin-top:24px;padding:28px 24px 24px;background:var(--od);color:var(--lt);border-bottom:8px solid var(--orange)}
+.doc{font-size:.8rem;color:#b9c49a;border-bottom:1px solid #4d5f37;padding-bottom:6px;margin-bottom:16px}
+.sub{font:600 1.4rem/1.2 "Barlow Condensed","Arial Narrow",Arial,sans-serif;text-transform:uppercase;letter-spacing:.04em;margin:14px 0 10px;max-width:40ch;color:#efc02a}
+.tag{color:#cdd5b3;margin:0}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:20px 0}
+.meta div{background:var(--panel);padding:8px 12px;border-left:5px solid var(--olive)}
+.meta div:nth-child(even){border-left-color:var(--blue)}
+.meta b{display:block;font-size:.7rem;font-weight:500;color:var(--mute);text-transform:uppercase;letter-spacing:.08em}
+.meta span{font-weight:600}
+nav{display:flex;flex-wrap:wrap;margin:16px 4px 0 0}
+nav a{font-size:.8rem;font-weight:500;text-decoration:none;color:var(--blue);background:var(--panel);border:1px solid var(--rule);margin:0 -1px -1px 0;padding:3px 10px}
+nav a:hover,nav a:focus-visible{background:var(--orange);color:#fff;outline:none}
+.p{background:var(--panel);border:1px solid var(--rule);border-top:5px solid var(--olive);padding:14px 16px}
+.g3 .p:nth-child(even),.g4 .p:nth-child(even){border-top-color:var(--blue)}
+.p.gold{border-top-color:var(--amber);background:color-mix(in srgb,var(--amber) 16%,var(--panel))}
+.p.red{border-top-color:var(--rust);background:color-mix(in srgb,var(--rust) 12%,var(--panel))}
+.g2,.g3,.g4{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.mt{margin-top:14px}
+.lead{font-size:1.05rem;font-weight:500}
+.quote{border-left:6px solid var(--orange);padding:2px 14px;margin:20px 0;font-size:1.05rem;font-weight:500}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--lt);background:var(--od);text-align:left;padding:6px 10px}
+td{padding:7px 10px;border-bottom:1px solid var(--hair);vertical-align:top}
+tr:nth-child(even) td{background:color-mix(in srgb,var(--olive) 8%,transparent)}
+td:first-child{font-weight:600;white-space:nowrap}
+.st{display:inline-block;font-size:.75rem;font-weight:700;padding:0 7px;margin-right:8px;color:#fff;background:var(--olive)}
+.st.b{background:var(--amber);color:#1a1d12}
+.st.c{background:var(--blue);color:#fff}
+.flow{list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px;padding:0}
+.flow li{counter-increment:s;padding:8px 10px 8px 46px;background:var(--panel);border:1px solid var(--rule);border-left:5px solid var(--blue);margin:0}
+.flow li::before{content:counter(s,decimal-leading-zero);left:10px;top:8px;font-size:.9rem;line-height:1.6;font-weight:700;color:var(--orange)}
+.warn{background:var(--rust);color:#fff;border:0;border-left:10px solid var(--amber);padding:12px 16px;margin-top:14px}
+.warn b:first-child{color:#ffd54a;letter-spacing:.06em}
+.north{margin-top:48px;padding:24px;background:var(--od);color:var(--lt);border-top:8px solid var(--orange)}
+.north h3{color:#efc02a}
+.north p{font:600 1.9rem/1.15 "Barlow Condensed","Arial Narrow",Arial,sans-serif;max-width:36ch;margin:0}
+footer{margin-top:32px;color:var(--mute);font-size:.8rem;border-top:3px solid var(--olive);padding-top:10px}
+@media(max-width:640px){body{font-size:14px}h2{grid-template-columns:44px 1fr}.hero{padding:22px 16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+<div class="doc">Product Requirements Document / Revision 1.1 / Concept – MVP definition</div>
+<h1>CHAKSHU</h1>
+<div class="sub">Community-based Hazard Assessment &amp; Knowledge System for Urban Mobility</div>
+<p class="tag">A community-powered transport safety intelligence network.</p>
+</header>
+
+<div class="meta">
+<div><b>Status</b><span>Concept / MVP Definition</span></div>
+<div><b>Scope</b><span>India, initial launch</span></div>
+<div><b>Category</b><span>Public safety / mobility intelligence</span></div>
+<div><b>Primary users</b><span>Passengers</span></div>
+<div><b>Platform</b><span>Web application</span></div>
+<div><b>Core model</b><span>Community-driven intelligence</span></div>
+</div>
+
+<div class="quote">“One passenger’s experience could become another passenger’s protection.”</div>
+<p>This document defines CHAKSHU’s vision, user needs, functional requirements, trust mechanisms, safety principles and success criteria. It does not prescribe a technology stack or development roadmap.</p>
+
+<nav aria-label="Sections">
+<a href="#s1">Summary</a><a href="#s2">Problem</a><a href="#s3">Vision</a><a href="#s4">Personas</a><a href="#s5">Scope</a><a href="#s6">Features</a><a href="#s7">Journeys</a><a href="#s8">NFRs</a><a href="#s9">Admin</a><a href="#s10">Safety &amp; legal</a><a href="#s11">Metrics</a><a href="#s12">Assumptions</a><a href="#s13">Future</a><a href="#s14">Acceptance</a>
+</nav>
+
+<h2 id="s1"><span class="c">01</span>Executive summary</h2>
+<div class="p">
+<p class="lead">CHAKSHU is a public platform that improves passenger safety through crowdsourced incident reporting and vehicle-specific safety intelligence.</p>
+<p>Passengers search a vehicle by registration number and review previously submitted safety reports. Passengers who experience uncomfortable, suspicious, intimidating, harassing or unsafe behaviour can submit a structured report, which feeds a shared repository that helps future passengers decide before they board.</p>
+<p>Unlike booking, navigation, payment and rating platforms, CHAKSHU focuses on recurring safety concerns tied to individual vehicles. It does <b>not</b> establish criminal guilt, certify vehicles as safe or unsafe, or replace law enforcement. It makes community-reported safety information accessible, structured, transparent and useful.</p>
+</div>
+
+<h2 id="s2"><span class="c">02</span>Problem statement</h2>
+<div class="g2">
+<div class="p"><h3>Current landscape</h3>
+<p>Passengers rely on independently operated autos, e-rickshaws, taxis and app-based cabs, yet know little about earlier safety experiences with a given vehicle. Existing services offer:</p>
+<ul><li>Driver ratings and reviews</li><li>Provider-supplied vehicle and driver details</li><li>Trip information and tracking</li><li>Complaints confined to a single platform</li></ul></div>
+<div class="p red"><h3>Limitations</h3>
+<ul class="bad"><li>Safety experiences stay locked inside individual booking platforms.</li><li>Independently hired transport has no accessible safety history.</li><li>Passengers cannot warn future passengers.</li><li>Recurring behavioural patterns go unnoticed.</li><li>No universal, community-maintained repository exists across providers.</li></ul></div>
+</div>
+<div class="p gold mt"><h3>Core problem</h3>
+<p>There is no sufficiently accessible, independent, community-driven mechanism for passengers to check previously reported safety concerns about a vehicle before boarding it.</p></div>
+
+<h2 id="s3"><span class="c">03</span>Product vision</h2>
+<p class="lead">Establish a community-powered transportation safety intelligence network where passengers contribute, discover and access vehicle-specific safety information, turning isolated experiences into collective, preventive knowledge.</p>
+<div class="g2 mt">
+<div class="p"><h3>Mission</h3><p>Enable passengers to:</p><ul><li>Check the available safety history of a vehicle</li><li>Report concerning experiences</li><li>Identify recurring safety patterns</li><li>Make informed transport decisions</li><li>Contribute to a shared safety network</li></ul></div>
+<div class="p"><h3>Guiding principles</h3><ul>
+<li><b>Prevention over reaction.</b> Surface concerning information before another incident occurs.</li>
+<li><b>Collective intelligence.</b> Individual experiences build community awareness.</li>
+<li><b>Privacy by design.</b> Protect reporters’ identities and personal data.</li>
+<li><b>Evidence-conscious reporting.</b> Separate allegations, reviewed reports and independently supported information.</li>
+<li><b>Fairness and accountability.</b> Protect passengers while shielding drivers from unchecked or fabricated claims.</li></ul></div>
+</div>
+
+<h2 id="s4"><span class="c">04</span>Users and personas</h2>
+<div class="g4">
+<div class="p"><h3>A. Safety-conscious passenger</h3><p>Regular auto, taxi or cab user who wants to know whether concerns have been reported.</p><ul><li>Search a registration number fast</li><li>See nature and recency of reports</li><li>Decide before boarding</li></ul></div>
+<div class="p"><h3>B. Reporting passenger</h3><p>Has experienced uncomfortable, threatening or inappropriate behaviour.</p><ul><li>Report conveniently</li><li>Stay publicly unidentified</li><li>Receive confirmation and understand moderation</li></ul></div>
+<div class="p"><h3>C. Community contributor</h3><p>Documents genuine experiences to build a reliable database.</p><ul><li>Submit structured reports</li><li>Avoid duplicates</li><li>Read transparent policies</li></ul></div>
+<div class="p"><h3>D. Reported vehicle operator</h3><p>Finds reports associated with their vehicle.</p><ul><li>Understand published concerns</li><li>Challenge wrong attribution or fabricated reports</li><li>Request review and fair resolution</li></ul></div>
+</div>
+
+<h2 id="s5"><span class="c">05</span>Product scope</h2>
+<div class="g2">
+<div class="p"><h3>In scope</h3><ul><li>Vehicle registration number search</li><li>Community-maintained vehicle database</li><li>Vehicle-specific report history</li><li>Passenger incident submission</li><li>Google authentication for reporting</li><li>Privacy-preserving reporter identities</li><li>Incident categorisation</li><li>Duplicate reporting prevention</li><li>Report moderation, disputes and appeals</li><li>Community safety indicators and timestamps</li><li>Administrative moderation tools</li></ul></div>
+<div class="p red"><h3>Out of scope</h3><ul class="bad"><li>Booking and ride-hailing</li><li>Driver hiring or employment verification</li><li>Real-time vehicle tracking</li><li>Police database integration</li><li>Criminal background verification</li><li>Government vehicle safety certification</li><li>Public disclosure of driver identities or personal data</li><li>Automatic determination of criminal intent</li><li>Replacing emergency services</li><li>Official RTO vehicle verification</li></ul>
+<p class="mt">RTO-backed registration verification may be considered later, subject to authorised access.</p></div>
+</div>
+
+<h2 id="s6"><span class="c">06</span>Functional requirements</h2>
+
+<div class="p"><h3>6.1 Vehicle safety search</h3>
+<p>Search by Indian registration number is the platform’s primary entry point.</p>
+<ul><li>Search and public safety information require no account.</li><li>Registration numbers are normalised before lookup, supporting applicable Indian formats.</li><li>Results match the exact normalised registration number.</li><li>Invalid formats return a clear validation message.</li><li>Results never expose reporter identities.</li></ul>
+<div class="tw mt"><table><tr><th>Result state</th><th>Behaviour</th></tr>
+<tr><td><span class="st a">A</span>Reports available</td><td>Show total and published report counts, incident categories, dates, moderation status, evidence indicators and dispute information.</td></tr>
+<tr><td><span class="st b">B</span>No reports found</td><td>State that no safety reports have been submitted on the platform yet. Absence of reports must never be presented as proof of safety.</td></tr>
+<tr><td><span class="st c">C</span>Under review</td><td>Reports exist but have not completed moderation. Pending submissions must be visibly distinct from published reports.</td></tr></table></div></div>
+
+<div class="p mt"><h3>6.2 Vehicle safety profile</h3>
+<p>Every vehicle with at least one report has a consolidated profile showing: registration number and verification status; total and published report counts; incident category distribution; submission dates and recent activity; evidence indicators; moderation information; and dispute status.</p>
+<p>The community safety indicator must favour descriptive categories over numerical scores, must not imply official verification or guilt, and must rest on published criteria covering report quality, recency, independence, severity and moderation status. A vehicle with no reports never receives a “certified safe” status.</p>
+<div class="tw"><table><tr><th>Indicator</th><th>Meaning</th></tr>
+<tr><td>Insufficient Information</td><td>Not enough information to draw a meaningful conclusion.</td></tr>
+<tr><td>No Significant Concerns Reported</td><td>No significant concerns established under the platform’s defined criteria.</td></tr>
+<tr><td>Some Concerns Reported</td><td>Some relevant community concerns have been reported.</td></tr>
+<tr><td>Elevated Community Concern</td><td>Multiple or sufficiently serious concerns meet the published criteria.</td></tr>
+<tr><td>Multiple Serious Reports</td><td>Multiple serious reports received and assessed under the review rules.</td></tr></table></div></div>
+
+<div class="p mt"><h3>6.3 Incident reporting</h3>
+<p>Authenticated passengers submit structured reports through a simple flow designed to minimise friction for people who may be distressed.</p>
+<div class="g3"><div><h3>Authentication</h3><ul><li>Google sign-in is mandatory to report.</li><li>Each account gets an internal platform identity.</li><li>Google account details never appear publicly.</li><li>A mobile number is never required.</li></ul></div>
+<div><h3>Required fields</h3><ul><li>Vehicle registration number</li><li>Incident category</li><li>Incident date or approximate date</li><li>Incident description</li></ul></div>
+<div><h3>Optional fields</h3><ul><li>Approximate journey location</li><li>Photos or documents</li><li>Ride receipt or booking reference</li><li>Additional context</li></ul></div></div>
+<div class="tw mt"><table><tr><th>Category</th><th>Description</th></tr>
+<tr><td>Harassment</td><td>Unwanted comments, advances or inappropriate conduct.</td></tr>
+<tr><td>Suspicious Behaviour</td><td>Behaviour causing reasonable concern about passenger safety.</td></tr>
+<tr><td>Route Manipulation</td><td>Unexpected or deliberate deviation from the agreed route.</td></tr>
+<tr><td>Threatening Behaviour</td><td>Intimidation, coercion or threats.</td></tr>
+<tr><td>Unsafe Driving</td><td>Reckless or deliberately dangerous driving.</td></tr>
+<tr><td>Physical Misconduct</td><td>Unwanted physical contact or attempted physical harm.</td></tr>
+<tr><td>Attempted Misconduct</td><td>Conduct suggesting a potential attempt to cause harm.</td></tr>
+<tr><td>Other</td><td>Relevant safety concerns outside the predefined categories.</td></tr></table></div>
+<ul class="mt"><li>Reports attach to a specific vehicle record; a new record is created if none exists.</li><li>All reports are moderated before publication, and duplicates are detected.</li><li>Separate incidents involving the same vehicle may be reported.</li><li>Submitting a report never triggers an automatic negative classification.</li></ul></div>
+
+<div class="g2 mt">
+<div class="p"><h3>6.4 Reporter identity and privacy</h3>
+<p>Create enough accountability to deter malicious reports without exposing passengers.</p>
+<ul><li>Unique internal user ID per account; Google identifiers handled securely.</li><li>Identity data stays separate from public reports.</li><li>Names, emails and account IDs never appear on public profiles or public APIs.</li><li>Collect only necessary data; restrict access to identity records.</li><li>Define retention and deletion policies and publish clear privacy disclosures.</li><li>Handle lawful disclosure requests under applicable law.</li></ul>
+<p class="mt">The platform offers privacy protection without promising absolute anonymity.</p></div>
+<div class="p"><h3>6.5 Duplicate reporting prevention</h3>
+<p><b>Core rule:</b> one account may submit one initial report per vehicle.</p>
+<ul><li>Device identifiers and IP rate limiting serve only as supplementary abuse signals.</li><li>Substantially repeated submissions are detected.</li><li>Genuinely new incidents may be reported separately.</li><li>Multiple accounts or devices are not assumed to be independent witnesses.</li><li>Suspicious patterns are routed to moderation.</li></ul>
+<p class="mt">The platform does not claim to guarantee one physical device per report, since browsers cannot reliably identify hardware.</p></div>
+</div>
+
+<div class="p mt"><h3>6.6 Report moderation</h3>
+<p>Reports never become public allegations on submission. Each report enters a pending state and is checked for abusive, irrelevant, defamatory or identifying content, with personal information redacted and evidence reviewed for relevance and privacy. A report can be approved, rejected or returned for clarification; every decision is recorded, and published reports stay subject to later review.</p>
+<h3 class="mt">Launch-stage moderation model</h3>
+<p>No dedicated moderation team is assumed at launch. Moderation relies on automation plus a small admin function that can grow later.</p>
+<ul><li><b>Automated pre-screening.</b> Flags abusive language, phone numbers, names and other personal data, and duplicate or suspicious submissions, before a human sees the report.</li><li><b>Admin review.</b> The founder or a small admin group works the review queue and makes the approve, reject or clarify decision.</li><li><b>Conservative publication.</b> Nothing is published without admin approval. A slow queue is acceptable; a careless one is not.</li><li><b>Community flagging.</b> Signed-in users can flag published reports for re-review.</li><li><b>Growth path.</b> Trained volunteers or safety-organisation partners can join as reviewers as volume grows, under the same audit logging.</li></ul>
+<div class="tw"><table><tr><th>Status</th><th>Meaning</th></tr>
+<tr><td>Pending Review</td><td>Awaiting moderation.</td></tr>
+<tr><td>Approved for Publication</td><td>Approved for public display under platform policy.</td></tr>
+<tr><td>Rejected</td><td>Not approved for publication.</td></tr>
+<tr><td>Under Dispute</td><td>Subject to a formal challenge.</td></tr>
+<tr><td>Temporarily Hidden</td><td>Not visible while further review takes place.</td></tr>
+<tr><td>Removed</td><td>Removed from public display and handled under the retention policy.</td></tr></table></div></div>
+
+<div class="g2 mt">
+<div class="p"><h3>6.7 Dispute and appeal</h3>
+<p>Affected vehicle operators can challenge incorrect or fabricated reports.</p>
+<ul><li>A dispute identifies the relevant report and may include supporting documents.</li><li>An authorised administrator reviews it.</li><li>Outcomes are recorded and corrections are reflected on the public profile.</li><li>A dispute neither removes a report automatically nor counts as an admission of wrongdoing.</li></ul></div>
+<div class="p"><h3>6.8 Community safety intelligence</h3>
+<p>Reports are consolidated into patterns, not tallies of negative reactions. Factors weighed:</p>
+<ul><li>Independent report count, recency, nature and severity</li><li>Similarity between descriptions</li><li>Supporting evidence and moderation outcomes</li><li>Duplicate or coordinated reporting signals</li><li>Dispute history</li></ul></div>
+</div>
+<div class="p gold mt"><h3>Intelligence principles</h3>
+<div class="g2"><ul><li>One unverified allegation never creates an elevated-risk classification.</li><li>Repeated similar reports are a stronger signal than unrelated ones.</li><li>Old reports are weighted below recent ones.</li></ul>
+<ul><li>Rejected or removed reports never feed public indicators.</li><li>Unverified and reviewed reports are clearly distinguished.</li><li>The indicator methodology is public.</li></ul></div></div>
+
+<h2 id="s7"><span class="c">07</span>User journeys</h2>
+<h3>Vehicle search</h3>
+<ol class="flow"><li>Passenger opens the platform</li><li>Enters a registration number</li><li>System validates and normalises it</li><li>Community database is queried</li><li>Passenger receives result state A, B or C</li><li>Profile is shown, or absence of records is communicated</li><li>Passenger searches another vehicle</li></ol>
+<h3 class="mt">Incident reporting</h3>
+<ol class="flow"><li>Selects “report vehicle”</li><li>Signs in with Google</li><li>Enters or confirms registration number</li><li>Existing vehicle record is selected or a new one created</li><li>Selects incident category</li><li>Provides description and details</li><li>Duplicate and abuse checks run</li><li>Report goes to moderation</li><li>Passenger receives confirmation</li><li>Report is published or rejected under policy</li></ol>
+<h3 class="mt">Vehicle dispute</h3>
+<ol class="flow"><li>Operator opens the dispute facility</li><li>Identifies the report</li><li>States reasons and adds supporting information</li><li>Administrator reviews</li><li>Decision is recorded</li><li>Public status updated where appropriate</li></ol>
+
+<h2 id="s8"><span class="c">08</span>Non-functional requirements</h2>
+<div class="g4">
+<div class="p"><h3>Security</h3><ul><li>Credentials handled securely; sensitive data encrypted</li><li>Abuse prevention on public endpoints</li><li>Role-based admin access</li><li>Evidence files private by default</li><li>Protection against common web vulnerabilities</li></ul></div>
+<div class="p"><h3>Privacy</h3><ul><li>No public exposure of personal data</li><li>Purpose limitation and data minimisation</li><li>Defined retention and clear disclosures</li><li>Compliance with Indian data-protection requirements</li></ul></div>
+<div class="p"><h3>Availability and performance</h3><ul><li>Low-latency search, no login needed</li><li>Scales with report volume</li><li>Profiles stay available in normal operation</li><li>Errors never leak sensitive information</li></ul></div>
+<div class="p"><h3>Accessibility</h3><ul><li>Mobile-first, responsive</li><li>Clear, plain language</li><li>Accessible forms and validation</li><li>Minimal steps to search</li><li>Reporting usable at any technical literacy</li></ul></div>
+</div>
+
+<h2 id="s9"><span class="c">09</span>Administrative requirements</h2>
+<div class="p"><p>At launch this role may be held by the founder or a small admin group. Authorised administrators must be able to:</p>
+<div class="g2"><ul><li>Review reports and supporting evidence</li><li>Approve or reject reports</li><li>Identify suspicious submission patterns</li><li>Manage vehicle records and correct wrong associations</li><li>Handle disputes and appeals</li></ul>
+<ul><li>Remove prohibited personal information</li><li>Review user abuse reports</li><li>Suspend or restrict abusive accounts</li><li>Maintain moderation audit logs</li></ul></div>
+<p class="mt">Every administrative action affecting published safety information must be auditable.</p></div>
+
+<h2 id="s10"><span class="c">10</span>Safety, legal and ethical considerations</h2>
+<p>CHAKSHU handles allegations about real people and vehicles. Its credibility depends on balancing public safety with fairness, privacy and responsible publication.</p>
+<div class="g2 mt">
+<div class="p"><h3>10.1 No determination of guilt</h3><p>The platform never declares a driver guilty of a crime on community submissions alone. Reports are passenger-submitted experiences and allegations, not judicial findings.</p></div>
+<div class="p"><h3>10.2 Vehicle identity limits</h3><p>At launch, registration numbers are community-submitted and not verified against the RTO database. A valid format does not prove the physical vehicle displaying that number is genuine. The platform must say so clearly.</p></div>
+<div class="p"><h3>10.3 False and malicious reporting</h3><p>Reasonable safeguards must cover personal disputes, deliberate false allegations, coordinated campaigns, incorrect registration numbers, duplicate incidents and attempts to expose personal information.</p></div>
+<div class="p"><h3>10.5 Regulatory compliance</h3><p>Consider Indian law on personal data protection, defamation and intermediary responsibilities, cybersecurity, consumer protection, information technology and lawful information requests. Publication and moderation policies need review before public launch.</p></div>
+</div>
+<div class="warn"><b>10.4 EMERGENCY DISCLAIMER</b><br>CHAKSHU is not an emergency response service. Anyone in immediate danger should be directed to emergency assistance, including India’s emergency number <b>112</b>.</div>
+
+<h2 id="s11"><span class="c">11</span>Success metrics</h2>
+<p>Success is measured by the platform’s ability to deliver useful safety information within a trustworthy reporting environment.</p>
+<div class="g4 mt">
+<div class="p"><h3>Adoption</h3><ul><li>Registered users</li><li>Unique vehicle searches</li><li>Vehicles in the database</li><li>Returning-user rate</li><li>Search-to-report conversion</li></ul></div>
+<div class="p"><h3>Reporting</h3><ul><li>Reports submitted and approved</li><li>Average moderation time</li><li>Reports with evidence</li><li>Duplicate submission rate</li></ul></div>
+<div class="p"><h3>Trust and quality</h3><ul><li>Rejection rate in moderation</li><li>Successful dispute resolutions</li><li>Reports corrected or removed</li><li>Coordinated-reporting detection rate</li><li>User-reported confidence</li></ul></div>
+<div class="p"><h3>Safety utility</h3><ul><li>Searches returning useful information</li><li>Profiles viewed before journeys</li><li>User-reported usefulness</li><li>Searches leading to informed follow-up action</li></ul></div>
+</div>
+<p class="mt">A decline in reported incidents must not be the only success measure. Rising reports may reflect better awareness and access, not worsening safety.</p>
+
+<h2 id="s12"><span class="c">12</span>Assumptions and constraints</h2>
+<div class="p"><ul>
+<li>Passengers can identify vehicles by registration number.</li>
+<li>Users are willing to contribute genuine safety experiences.</li>
+<li>Google authentication gives reasonable initial account-level accountability.</li>
+<li>Properly moderated community reports can form a useful repository.</li>
+<li>Government RTO API access is not required for the initial product, which runs on user-submitted registration numbers.</li>
+<li>Useful vehicle-level information can be built without collecting unnecessary driver identity data.</li>
+<li>Safety indicators must account for incomplete data and uncertainty.</li><li>Early moderation volume can be handled by automated screening and a small admin group, with reviewers added as volume grows.</li></ul></div>
+
+<h2 id="s13"><span class="c">13</span>Future opportunities</h2>
+<p>Possible extensions beyond the initial product, none a prerequisite for launch:</p>
+<div class="g3 mt">
+<div class="p"><ul><li>Official RTO registration verification</li><li>Number plate recognition using OCR</li><li>QR-based vehicle lookup</li><li>Ride receipt and booking verification</li></ul></div>
+<div class="p"><ul><li>Integration with transport providers</li><li>Native Android and iOS apps</li><li>Multilingual reporting</li><li>Advanced coordinated-report detection</li></ul></div>
+<div class="p"><ul><li>Geographic safety intelligence</li><li>Partnerships with women’s safety organisations</li><li>Collaboration with transport authorities</li><li>Privacy-preserving sharing of aggregated intelligence</li></ul></div>
+</div>
+
+<h2 id="s14"><span class="c">14</span>Acceptance criteria</h2>
+<div class="p"><p>The initial product is functionally complete when:</p>
+<div class="g2"><ul>
+<li>A passenger can search a vehicle without an account.</li>
+<li>Vehicles with reports are distinguished from those without.</li>
+<li>A passenger can authenticate via Google before reporting.</li>
+<li>An authenticated passenger can submit a structured report.</li>
+<li>Reports attach to the correct vehicle record.</li>
+<li>Duplicate initial submissions by one account against one vehicle are blocked.</li>
+<li>Separate genuine incidents can be submitted and told apart.</li></ul>
+<ul>
+<li>Reports are moderated before publication.</li>
+<li>Public profiles never expose reporter identities.</li>
+<li>Users can tell unverified from reviewed information.</li>
+<li>Vehicle operators have a dispute mechanism.</li>
+<li>Missing reports are never presented as proof of safety.</li>
+<li>Administrative actions are auditable.</li>
+<li>Appropriate privacy and safety disclosures are provided.</li></ul></div></div>
+
+<h2><span class="c">15</span>Conclusion</h2>
+<p class="lead">CHAKSHU adds a layer of transparency and preventive awareness to everyday transport. Its contribution is not booking, driver discovery or conventional ratings, but converting individual passenger experiences into structured, accessible, community-maintained safety information. The long-term vision is a trusted, independent safety intelligence network that complements existing transport services and contributes to safer public mobility.</p>
+
+<div class="north"><h3>Product north star</h3><p>Make relevant community-reported safety information accessible before a passenger boards a vehicle, while protecting the privacy and rights of everyone involved.</p></div>
+<footer>CHAKSHU · The eye that sees · PRD v1.1 · Concept / MVP Definition</footer>
+</div>
+</body>
+</html>
